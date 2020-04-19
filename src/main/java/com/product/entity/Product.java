@@ -19,6 +19,7 @@ public class Product {
     private double price;
 
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
@@ -59,5 +60,16 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", madeIn='" + madeIn + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
