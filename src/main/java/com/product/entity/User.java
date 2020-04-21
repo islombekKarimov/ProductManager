@@ -1,7 +1,7 @@
 package com.product.entity;
 
 /**
- * Created by acer i5 on 16.04.2020.
+ * Created by Islombek Karimov on 16.04.2020.
  */
 public class User {
     private int id;
