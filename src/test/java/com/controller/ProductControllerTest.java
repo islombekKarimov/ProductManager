@@ -53,18 +53,11 @@ public class ProductControllerTest {
         Product product = TestDataProvider.createProduct();
         mockMvc.perform(post("/save/{product}", product).contentType(APPLICATION_JSON))
                 .andDo(print())
-
-//                .andExpect(content().contentTypeCompatibleWith("application/json"))
                 .andExpect(status().isOk());
 
 
     }
 
-
-//    mockMvc.perform(get("/index").contentType(MediaType.APPLICATION_JSON))
-//            .andExpect(status().isOk())
-//            .andExpect(content().contentTypeCompatibleWith("application/json"))
-//            .andExpect(jsonPath("$.greeting").value("Hello World"));
 
 
 
