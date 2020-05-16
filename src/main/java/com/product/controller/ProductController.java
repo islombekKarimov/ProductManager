@@ -1,7 +1,7 @@
 package com.product.controller;
 
 import com.product.entity.Product;
-import com.product.service.ProductService;
+import com.product.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping("/")
+    @RequestMapping("/product_list")
     public String viewHomePage(Model model) {
         List<Product> getProductList = productService.getProductList();
         model.addAttribute("productList", getProductList);
