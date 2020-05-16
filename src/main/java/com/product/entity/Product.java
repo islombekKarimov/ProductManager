@@ -1,27 +1,35 @@
 package com.product.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Islombek Karimov on 21.03.2020.
  */
 
 @Entity
+@Table(name = "product")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private int id ;
+    @Column(name = "name", nullable = false)
+    @NotNull(message = "product name con't be null")
     private String name;
+    @Column(name = "brand", nullable = false)
+    @NotNull(message = "product brand can't be null")
     private String brand;
+    @Column(name = "made_in", nullable = false)
+    @NotNull(message = "product made in can't be null")
     private String madeIn;
+    @Column(name = "price", nullable = false)
+    @NotNull(message = "product price can't be null")
     private double price;
 
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
