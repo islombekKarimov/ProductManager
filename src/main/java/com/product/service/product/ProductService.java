@@ -1,4 +1,4 @@
-package com.product.service;
+package com.product.service.product;
 
 import com.product.entity.Product;
 import com.product.repository.ProductRepository;
