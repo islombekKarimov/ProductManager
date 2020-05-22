@@ -4,6 +4,7 @@ import com.product.entity.User;
 import com.product.repository.UserRepository;
 import com.product.service.user.UserService;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService{
+    @Autowired
     private UserRepository userRepository;
 
 
