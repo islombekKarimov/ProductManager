@@ -8,5 +8,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  * Created by Islombek Karimov on 22.04.2020.
  */
-public interface UserRepository extends PagingAndSortingRepository<User,Integer> {
+public interface UserRepository extends JpaRepository<User,Integer> {
 }
