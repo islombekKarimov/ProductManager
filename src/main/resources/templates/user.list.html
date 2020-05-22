@@ -13,6 +13,7 @@
             <th>Name</th>
             <th>Login</th>
             <th>Password</th>
+            <th>Products</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -22,9 +23,11 @@
             <td th:text="${user.name}"></td>
             <td th:text="${user.login}"></td>
             <td th:text="${user.password}"></td>
+            <td><a th:href="@{'/products/' + ${user.id}}">Products </a>
+            <br>
             <td><a th:href="@{'/edit/' + ${user.id}}">Edit </a>
                 <br>
-                <a th:href="@{'/delete/' + ${user.id}}">Delete</a>
+                <a th:href="@{'/delete_user/' + ${user.id}}">Delete</a>
             </td>
 
         </tr>
