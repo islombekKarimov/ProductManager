@@ -32,9 +32,6 @@ public class UserController {
 
     @PostMapping(value = {"/save_user"})
     public String saveUser(@ModelAttribute(name = "user") User user ){
-        System.out.println(user.getName());
-        System.out.println(user.getLogin());
-        System.out.println(user.getPassword());
         userService.create(user);
     return "redirect:/user_list";
     }
@@ -44,6 +41,12 @@ public class UserController {
         List<User> userList = userService.findAll();
         model.addAttribute("userList", userList);
         return "user.list";
+    }
+
+    @RequestMapping(value = {"/delete_user/{id}"})
+    public String deleteUser(@PathVariable(name = "id") int id){
+        userService.delete(id);
+        return "redirect:/user_list";
     }
 
 

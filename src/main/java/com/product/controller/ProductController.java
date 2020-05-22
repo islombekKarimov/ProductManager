@@ -41,7 +41,7 @@ public class ProductController {
     @PostMapping(value = "/save")
     public  String saveProduct(@ModelAttribute(name = "product") Product productDTO) {
         productService.saveProduct(productDTO);
-        return "redirect:/";
+        return "redirect:/product_list";
     }
 
 
