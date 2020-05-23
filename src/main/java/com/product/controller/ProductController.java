@@ -45,7 +45,7 @@ public class ProductController {
     }
 
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping(value = "/edit/{id}")
     public ModelAndView editProduct(@PathVariable(name = "id") int id) {
         ModelAndView modelAndView = new ModelAndView("edit_product");
         Product product = productService.getProductById(id);

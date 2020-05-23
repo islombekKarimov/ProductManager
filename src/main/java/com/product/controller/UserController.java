@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -43,11 +44,24 @@ public class UserController {
         return "user.list";
     }
 
+
+    @RequestMapping(value = {"/edit_user/{id}"})
+    public ModelAndView modelAndView(@PathVariable(name = "id") int id){
+        ModelAndView modelAndView = new ModelAndView("user.edit");
+        User user = userService.findById(id);
+        modelAndView.addObject("user", user);
+        return modelAndView;
+    }
+
+
     @RequestMapping(value = {"/delete_user/{id}"})
     public String deleteUser(@PathVariable(name = "id") int id){
         userService.delete(id);
         return "redirect:/user_list";
     }
+
+
+
 
 
 
