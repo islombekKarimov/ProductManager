@@ -9,7 +9,6 @@
     <table border="1" cellpadding="10">
         <thead>
         <tr>
-            <th>Product Id</th>
             <th>Name</th>
             <th>Login</th>
             <th>Password</th>
@@ -19,13 +18,12 @@
         </thead>
         <tbody>
         <tr th:each="user: ${userList}">
-            <td th:text="${user.id}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.login}"></td>
             <td th:text="${user.password}"></td>
             <td><a th:href="@{'/products/' + ${user.id}}">Products </a>
             <br>
-            <td><a th:href="@{'/edit/' + ${user.id}}">Edit </a>
+            <td><a th:href="@{'/edit_user/' + ${user.id}}">Edit </a>
                 <br>
                 <a th:href="@{'/delete_user/' + ${user.id}}">Delete</a>
             </td>
