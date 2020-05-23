@@ -46,7 +46,7 @@ public class UserController {
 
 
     @RequestMapping(value = {"/edit_user/{id}"})
-    public ModelAndView modelAndView(@PathVariable(name = "id") int id){
+    public ModelAndView editUser(@PathVariable(name = "id") int id){
         ModelAndView modelAndView = new ModelAndView("user.edit");
         User user = userService.findById(id);
         modelAndView.addObject("user", user);
