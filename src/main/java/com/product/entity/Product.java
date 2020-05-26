@@ -27,8 +27,17 @@ public class Product {
     @Column(name = "price", nullable = false)
     @NotNull(message = "product price can't be null")
     private double price;
+    @Column(name = "user_id", nullable = false)
+    @NotNull(message = "userId can't be null")
+    private int userId;
 
+    public int getUserId() {
+        return userId;
+    }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public int getId() {
         return id;
