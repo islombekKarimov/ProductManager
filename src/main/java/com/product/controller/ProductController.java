@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping("/product_list")
+    @RequestMapping("/product_list/{userId}")
     public String viewHomePage(Model model) {
         List<Product> getProductList = productService.getProductList();
         model.addAttribute("productList", getProductList);
@@ -38,7 +38,7 @@ public class ProductController {
     }
 
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/save/{userId}")
     public  String saveProduct(@ModelAttribute(name = "product") Product productDTO) {
         productService.saveProduct(productDTO);
         return "redirect:/product_list";
