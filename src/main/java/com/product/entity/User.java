@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * Created by Islombek Karimov on 16.04.2020.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
