@@ -17,8 +17,7 @@
             <tr>
                 <td>Login:</td>
                 <td><input type="text" th:field="*{login}">
-                    <label
-                            th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+                    <label th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
                             class="validation-message"></label>
                 </td>
             </tr>
