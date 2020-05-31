@@ -48,13 +48,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUserByLogin(String login) {
+    public List<User> getUserByLogin(String login) {
         Session session = HibernateUtil.session();
         Query query = session.createQuery("FROM User u where u.login = :user_login", User.class);
         query.setParameter("user_login", login);
         List<User> userList = query.list();
-        User user = userList.get(0);
-        return user;
+        return userList;
     }
 
 }
