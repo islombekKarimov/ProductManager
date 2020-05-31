@@ -6,6 +6,7 @@ import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,13 +33,22 @@ public class UserController {
     }
 
     @PostMapping(value = {"/save_user"})
-    public String saveUser(@ModelAttribute(name = "user") User user ){
-        userService.create(user);
-    return "redirect:/user_list";
+    public ModelAndView createNewUser(@ModelAttribute(name = "user") User user, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+         List<User> existUser = userService.getUserByLogin(user.getLogin());
+        if (existUser.size() != 0) {
+            bindingResult.rejectValue("login", "error.login", "There is a User with such Login");
+            modelAndView.setViewName("registration");
+        }
+        else {
+            userService.create(user);
+            modelAndView.setViewName("redirect:/login");
+        }
+        return modelAndView;
     }
 
     @RequestMapping(value = {"/user_list"})
-    public String userList(Model model){
+    public String userList(Model model) {
         List<User> userList = userService.findAll();
         model.addAttribute("userList", userList);
         return "user.list";
@@ -46,7 +56,7 @@ public class UserController {
 
 
     @RequestMapping(value = {"/edit_user/{id}"})
-    public ModelAndView editUser(@PathVariable(name = "id") int id){
+    public ModelAndView editUser(@PathVariable(name = "id") int id) {
         ModelAndView modelAndView = new ModelAndView("user.edit");
         User user = userService.findById(id);
         modelAndView.addObject("user", user);
@@ -55,14 +65,10 @@ public class UserController {
 
 
     @RequestMapping(value = {"/delete_user/{id}"})
-    public String deleteUser(@PathVariable(name = "id") int id){
+    public String deleteUser(@PathVariable(name = "id") int id) {
         userService.delete(id);
         return "redirect:/user_list";
     }
-
-
-
-
 
 
 }
