@@ -18,6 +18,6 @@ public interface UserService {
     User update(User user, int id) throws EntityNotFoundException;
     void delete(int id) throws EntityNotFoundException;
     List<User> findAll();
-    User getUserByLogin(String login);
+    List<User> getUserByLogin(String login);
 
 }
