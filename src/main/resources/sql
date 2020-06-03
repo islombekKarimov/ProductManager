@@ -1,4 +1,8 @@
 
+--
+-- Create schema product_manager
+--
+
 CREATE DATABASE IF NOT EXISTS product_manager;
 USE product_manager;
 
@@ -11,21 +15,24 @@ CREATE TABLE `product` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(145) NOT NULL,
   `brand` varchar(145) NOT NULL,
-  `madeIn` varchar(145) NOT NULL,
   `price` double NOT NULL,
+  `made_in` varchar(255) default NULL,
+  `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `product`
+-- Definition of table `user`
 --
 
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` (`id`,`name`,`brand`,`madeIn`,`price`) VALUES
- (1,'Galaxy Note 10 +','Samsung','Korea',1300),
- (2,'Iphone 11 pro Max','Apple','USA',1400),
- (3,'Redmi Note 8 Pro','Xiami','China',170);
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(145) NOT NULL,
+  `login` varchar(145) NOT NULL,
+  `password` varchar(145) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
