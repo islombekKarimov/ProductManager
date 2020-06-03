@@ -1,10 +1,9 @@
 package com.product.service.product;
 
 import com.product.entity.Product;
-import com.product.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 /**
@@ -12,24 +11,13 @@ import java.util.List;
  */
 
 @Service
-public class ProductService {
+public interface ProductService {
+    List<Product> getProductList();
+    void saveProduct(Product product) throws EntityNotFoundException;
+    Product getProductById(int id) throws EntityNotFoundException;
+    void delete(int id) throws EntityNotFoundException;
+    List<Product> getProductListByUserId(int userId);
 
-    @Autowired
-    private ProductRepository productRepository;
 
-    public List<Product> getProductList(){
-        return productRepository.findAll();
-    }
 
-    public void saveProduct(Product product){
-        productRepository.save(product);
-    }
-
-    public Product getProductById(int id){
-       return productRepository.findById(id).get();
-    }
-
-    public void delete(int id){
-        productRepository.deleteById(id);
-    }
 }
