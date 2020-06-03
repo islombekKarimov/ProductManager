@@ -1,47 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User Registration</title>
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!--<script src="../static/bootstrap/js/jquery-1.10.2.min.js"></script>-->
-    <!--<script src="../static/bootstrap/js/bootstrap.min.js"></script>-->
-    <link rel="stylesheet" href="../../static/bootstrap/js/bootstrap.min.css">
-    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../static/bootstrap/js/jquery-3.1.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Login</title>
 </head>
-
 <body>
-<form th:action="@{/registration_page}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
-
-<div class="container">
-
-    <form th:action="@{/user_login}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" style="text-align: center" th:text="Welcome"></h3>
-        <br/>
-
-        <!--<label th:if="${#fields.hasErrors('login')}" th:errors="*{error}"-->
-               <!--class="validation-message"></label>-->
-        <input type="text" th:placeholder="Login"
-               id="login" name="login"  class="form-control"/>
-        <br/>
-
-        <input type="password" th:placeholder="Password"
-               id="password" name="password" class="form-control"/> <br/>
-
-        <!--<div align="center" th:if="${loginPassword}">-->
-            <!--<p style="font-size: 20; color: #FF1C19;">Login or Password invalid, please verify</p>-->
-        <!--</div>-->
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
+<div align="center">
+    <form th:action="@{/registration_page}" method="get">
+        <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
     </form>
-
+    <br>
+    <form action="#" th:action="@{/user_login}" th:object="${user}" method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td><input type="text" th:field="*{login}" placeholder="Login">
+                    <label th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+                           class="validation-message"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="password" th:field="*{password}" placeholder="Password"></td>
+                <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                       class="validation-message"></label>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Login</button></td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>
