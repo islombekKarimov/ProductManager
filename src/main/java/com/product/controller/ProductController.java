@@ -18,9 +18,9 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping("/product_list/{userId}")
-    public String viewHomePage(Model model) {
-        List<Product> getProductList = productService.getProductList();
+    @RequestMapping("/products_by_user_id/{id}")
+    public String viewHomePage(@PathVariable(name = "id") int userId, Model model) {
+        List<Product> getProductList = productService.getProductListByUserId(userId);
         model.addAttribute("productList", getProductList);
         return "index";
     }
@@ -57,6 +57,13 @@ public class ProductController {
     public String deleteProduct(@PathVariable(name = "id") int id) {
         productService.delete(id);
         return "redirect:/";
+    }
+
+    @RequestMapping (value = "/products_by_user_id/{userId}")
+    public String productListByUserId(@PathVariable(name = "userId") int userId){
+
+
+        return "";
     }
 
 
