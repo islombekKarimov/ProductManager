@@ -43,7 +43,7 @@ public class LoginController {
         if (userList.size() > 0) {
             for (User listUser : userList) {
                 if (listUser.getLogin().equals(user.getLogin()) && listUser.getPassword().equals(user.getPassword())) {
-                    modelAndView.addObject("redirect:/user_list");
+                    modelAndView.setViewName("redirect:/user_list");
                 } else {
                     bindingResult.rejectValue("password", "error.password", "Your Login or Password incorrect");
                     modelAndView.setViewName("login");
