@@ -18,11 +18,13 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @RequestMapping("/products_by_user_id/{id}")
-    public String viewHomePage(@PathVariable(name = "id") int userId, Model model) {
-        List<Product> getProductList = productService.getProductListByUserId(userId);
-        model.addAttribute("productList", getProductList);
-        return "index";
+    @GetMapping(value = {"/product_list_by_userId/{userId}"})
+    public String userList(@PathVariable(name = "userId") int userId, Model model) {
+        List<Product> productList = productService.getProductListByUserId(userId);
+        productList.stream().forEach(System.out::println);
+        model.addAttribute("productList", productList);
+        model.addAttribute("userId", userId);
+        return "user.products";
     }
 
     @RequestMapping("/test")
@@ -30,8 +32,8 @@ public class ProductController {
         return "index";
     }
 
-    @RequestMapping("/new")
-    public String showNewProduct(Model model) {
+    @GetMapping(value = "/new/{userId}")
+    public String showNewProduct(@PathVariable(name = "userId") int userId, Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
         return "new_product";
@@ -39,7 +41,7 @@ public class ProductController {
 
 
     @PostMapping(value = "/save/{userId}")
-    public  String saveProduct(@ModelAttribute(name = "product") Product productDTO) {
+    public String saveProduct(@ModelAttribute(name = "product") Product productDTO) {
         productService.saveProduct(productDTO);
         return "redirect:/product_list";
     }
@@ -59,12 +61,6 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @RequestMapping (value = "/products_by_user_id/{userId}")
-    public String productListByUserId(@PathVariable(name = "userId") int userId){
-
-
-        return "";
-    }
 
 
 }
