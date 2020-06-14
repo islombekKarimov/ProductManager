@@ -1,5 +1,6 @@
 package com.product.controller;
 
+import com.product.entity.Product;
 import com.product.entity.User;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
@@ -46,14 +47,6 @@ public class UserController {
         }
         return modelAndView;
     }
-
-    @RequestMapping(value = {"/user_list"})
-    public String userList(Model model) {
-        List<User> userList = userService.findAll();
-        model.addAttribute("userList", userList);
-        return "user.list";
-    }
-
 
     @RequestMapping(value = {"/edit_user/{id}"})
     public ModelAndView editUser(@PathVariable(name = "id") int id) {
