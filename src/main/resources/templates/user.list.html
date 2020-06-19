@@ -6,32 +6,7 @@
 </head>
 <body>
 <div align="center">
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Login</th>
-            <th>Password</th>
-            <th>Products</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${userList}">
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.login}"></td>
-            <td th:text="${user.password}"></td>
-            <td><a th:href="@{'/products/' + ${user.id}}">Products </a>
-            <br>
-            <td><a th:href="@{'/edit_user/' + ${user.id}}">Edit </a>
-                <br>
-                <a th:href="@{'/delete_user/' + ${user.id}}">Delete</a>
-            </td>
-
-        </tr>
-
-        </tbody>
-    </table>
+    <a href="/registration_page" style="text-align: left">User List</a>   <a href="/registration_page" style="text-align: right">Product List</a>
 </div>
 </body>
 </html>

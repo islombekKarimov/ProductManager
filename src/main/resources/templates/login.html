@@ -6,9 +6,10 @@
 </head>
 <body>
 <div align="center">
-    <form th:action="@{/registration_page}" method="get">
-        <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-    </form>
+    <!--<form th:action="@{/registration_page}" method="get">-->
+        <!--<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>-->
+    <!--</form>-->
+    <a href="/registration_page">Go To Registration Page</a>
     <br>
     <form action="#" th:action="@{/user_login}" th:object="${user}" method="post">
         <table border="0" cellpadding="10">
@@ -24,7 +25,7 @@
                        class="validation-message"></label>
             </tr>
             <tr>
-                <td colspan="2"><button type="submit">Login</button></td>
+                <td colspan="2" style="text-align: center"><button type="submit">Login</button></td>
             </tr>
         </table>
     </form>
