@@ -13,9 +13,14 @@ public class HibernateUtil {
     private static SessionFactory sessionFactory;
     private static Session session;
     public static Session session() {
+        try{
+
          sessionFactory = new Configuration().configure().buildSessionFactory();
          session = sessionFactory.openSession();
-         Transaction transaction = session.beginTransaction();
+        }catch (Throwable e){
+            e.printStackTrace();
+            throw  new ExceptionInInitializerError(e);
+        }
          return session;
     }
 

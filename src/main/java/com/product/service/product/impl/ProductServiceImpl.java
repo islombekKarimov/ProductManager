@@ -5,6 +5,7 @@ import com.product.repository.ProductRepository;
 import com.product.service.product.ProductService;
 import com.product.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductListByUserId(int userId) {
         Session session = HibernateUtil.session();
+        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery(" From Product where userId=:userId", Product.class);
         query.setParameter("userId", userId);
         return query.list();

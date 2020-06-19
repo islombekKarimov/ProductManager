@@ -5,6 +5,7 @@ import com.product.repository.UserRepository;
 import com.product.service.user.UserService;
 import com.product.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +51,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> getUserByLogin(String login) {
         Session session = HibernateUtil.session();
+        Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("FROM User u where u.login = :user_login", User.class);
         query.setParameter("user_login", login);
         List<User> userList = query.list();
+        transaction.commit();
+        session.close();
         return userList;
     }
 
