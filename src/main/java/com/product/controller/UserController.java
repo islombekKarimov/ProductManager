@@ -33,20 +33,28 @@ public class UserController {
         return "registration";
     }
 
+//    @PostMapping(value = {"/save_user"})
+//    public ModelAndView createNewUser(@ModelAttribute(name = "user") User user, BindingResult bindingResult) {
+//        ModelAndView modelAndView = new ModelAndView();
+//         List<User> existUser = userService.getUserByLogin(user.getLogin());
+//        if (existUser.size() != 0) {
+//            bindingResult.rejectValue("login", "error.login", "There is a User with such Login");
+//            modelAndView.setViewName("registration");
+//        }
+//        else {
+//            userService.create(user);
+//            modelAndView.setViewName("redirect:/login");
+//        }
+//        return modelAndView;
+//    }
+
     @PostMapping(value = {"/save_user"})
-    public ModelAndView createNewUser(@ModelAttribute(name = "user") User user, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-         List<User> existUser = userService.getUserByLogin(user.getLogin());
-        if (existUser.size() != 0) {
-            bindingResult.rejectValue("login", "error.login", "There is a User with such Login");
-            modelAndView.setViewName("registration");
-        }
-        else {
+    public String newUser(@ModelAttribute(name = "user") User user) {
             userService.create(user);
-            modelAndView.setViewName("redirect:/login");
-        }
-        return modelAndView;
+        return "registration";
     }
+
+
 
     @RequestMapping(value = {"/edit_user/{id}"})
     public ModelAndView editUser(@PathVariable(name = "id") int id) {

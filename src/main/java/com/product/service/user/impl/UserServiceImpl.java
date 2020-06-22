@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
-
     @Override
     public User create(User user) throws ConstraintViolationException, EntityNotFoundException {
         return userRepository.save(user);

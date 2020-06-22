@@ -1,7 +1,9 @@
 package com.product.controller;
 
 import com.product.entity.Product;
+import com.product.entity.User;
 import com.product.service.product.ProductService;
+import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,13 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping(value = {"/product_list_by_userId/{userId}"})
     public String userList(@PathVariable(name = "userId") int userId, Model model) {
         List<Product> productList = productService.getProductListByUserId(userId);
-        productList.stream().forEach(System.out::println);
+//        User user = userService.findById(userId);
         model.addAttribute("productList", productList);
         model.addAttribute("userId", userId);
         return "user.products";
@@ -33,7 +38,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/new/{userId}")
-    public String showNewProduct(@PathVariable(name = "userId") int userId, Model model) {
+    public String showNewProduct(@PathVariable(name = "userId") int user, Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
         return "new_product";
