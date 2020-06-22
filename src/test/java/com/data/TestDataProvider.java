@@ -1,6 +1,9 @@
 package com.data;
 
 import com.product.entity.Product;
+import com.product.entity.User;
+
+import javax.jws.soap.SOAPBinding;
 
 /**
  * Created by Islombek Karimov on 22.03.2020.
@@ -16,5 +19,14 @@ public class TestDataProvider {
                 .with(Product::setPrice,100.0)
                 .build();
 
+    }
+
+    public static User createUser(){
+        return GenericBuilder.of(User :: new)
+                .with(User::setId,1)
+                .with(User::setName, "USER_NAME")
+                .with(User::setLogin, "USER_LOGIN")
+                .with(User::setPassword,"USER_PASSWORD")
+                .build();
     }
 }
