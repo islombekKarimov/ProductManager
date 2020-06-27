@@ -16,6 +16,8 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static java.util.Optional.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,6 +44,23 @@ public class UserServiceTest {
         when(userRepository.findAll()).thenReturn(userList);
         assertEquals("find all", 2, userService.findAll().size());
         verify(userRepository).findAll();
+    }
+
+    @Test
+    public void findByIdTest() throws EntityNotFoundException{
+        User user = new User();
+        when(userRepository.findById(1)).thenReturn(ofNullable(user));
+        User userDTO = userService.findById(1);
+        assertThat(user.getName()).isEqualTo(userDTO.getName());
+    }
+
+    @Test
+    public void deleteTest() throws EntityNotFoundException{
+        User user = new User();
+        when(userRepository.findById(1)).thenReturn(ofNullable(user));
+        userService.delete(1);
+        verify(userRepository).deleteById(1);
+//        assertThat(user.getId().)
     }
 
 
