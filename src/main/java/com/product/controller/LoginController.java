@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Islombek Karimov on 08.05.2020.
  */
-@Controller
+@RestController
 public class LoginController {
 
     @Autowired

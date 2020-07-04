@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Islombek Karimov on 21.03.2020.
  */
-@Controller
+@RestController
 public class ProductController {
     @Autowired
     ProductService productService;

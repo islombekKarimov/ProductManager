@@ -1,22 +1,25 @@
 package com.product.controller;
 
+import com.product.dto.UserTDO;
 import com.product.entity.Product;
 import com.product.entity.User;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
  * Created by Islombek Karimov on 16.05.2020.
  */
-@Controller
+@RestController
 public class UserController {
 
     @Autowired
@@ -49,9 +52,9 @@ public class UserController {
 //    }
 
     @PostMapping(value = {"/save_user"})
-    public String newUser(@ModelAttribute(name = "user") User user) {
-            userService.create(user);
-        return "registration";
+    @ResponseStatus(HttpStatus.CREATED)
+    public User createUser(@Valid @RequestBody User user ) {
+        return userService.create(user);
     }
 
 
