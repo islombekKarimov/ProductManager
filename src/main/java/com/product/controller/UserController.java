@@ -1,13 +1,16 @@
 package com.product.controller;
+import com.product.dto.UserDTO;
 import com.product.entity.User;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 /**
@@ -47,18 +50,15 @@ public class UserController {
 
     @PostMapping(value = {"/save_user"})
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@Valid @RequestBody User user ) {
-        return userService.create(user);
+    public UserDTO createUser(@Valid @RequestBody UserDTO userDTO ) throws ConstraintViolationException, EntityNotFoundException {
+        return userService.create(userDTO);
     }
 
 
 
     @RequestMapping(value = {"/edit_user/{id}"})
-    public ModelAndView editUser(@PathVariable(name = "id") int id) {
-        ModelAndView modelAndView = new ModelAndView("user.edit");
-        User user = userService.findById(id);
-        modelAndView.addObject("user", user);
-        return modelAndView;
+    public UserDTO editUser(@PathVariable(name = "id") int id) throws ConstraintViolationException, EntityNotFoundException {
+        return userService.findById(id);
     }
 
 
