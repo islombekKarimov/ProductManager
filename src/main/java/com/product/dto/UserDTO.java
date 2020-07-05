@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 /**
  * Created by Islombek Karimov on 04.07.2020.
  */
-public class UserTDO {
+public class UserDTO {
     private int id;
     @NotEmpty(message = "Name can not be null!")
     private String name;

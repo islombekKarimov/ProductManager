@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 /**
  * Created by Islombek Karimov on 05.07.2020.
  */
-public class ProductTDO {
+public class ProductDTO {
 
     private int id ;
     @NotEmpty(message = "Name can not be null!")
