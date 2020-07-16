@@ -1,6 +1,7 @@
 package com.product.dto;
 
 
+import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -45,5 +46,22 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UserDTO userDTO = (UserDTO) o;
+        return id == userDTO.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

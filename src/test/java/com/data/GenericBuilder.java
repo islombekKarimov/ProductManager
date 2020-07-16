@@ -14,7 +14,7 @@ public class GenericBuilder<T> {
 
     private final Supplier<T> instantiator;
 
-    private List<Consumer<T>> instanceModifiers = new ArrayList<>();
+    private List<Consumer<T>> instanceModifiers;
 
     public GenericBuilder(Supplier<T> instantiator) {
         this.instantiator = instantiator;

@@ -1,5 +1,6 @@
 package com.product.service.user.impl;
 
+import com.product.dto.UserDTO;
 import com.product.entity.User;
 import com.product.repository.UserRepository;
 import com.product.service.user.UserService;
@@ -23,7 +24,8 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
-    public User create(User user) throws ConstraintViolationException, EntityNotFoundException {
+    public User create(User userDTO) throws ConstraintViolationException, EntityNotFoundException {
+        User user = userRepository.save(userDTO);
         return userRepository.save(user);
     }
 

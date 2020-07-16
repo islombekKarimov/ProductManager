@@ -1,5 +1,6 @@
 package com.product.service.user;
 
+import com.product.dto.UserDTO;
 import com.product.entity.User;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,9 @@ import java.util.List;
  */
 @Service
 public interface UserService {
-    User create(User user) throws ConstraintViolationException, EntityNotFoundException;
+    User create(User userDTO) throws ConstraintViolationException, EntityNotFoundException;
     User findById(int id) throws EntityNotFoundException;
-    User update(User user, int id) throws EntityNotFoundException;
+    User update(User userDTO, int id) throws EntityNotFoundException;
     void delete(int id) throws EntityNotFoundException;
     List<User> findAll();
     List<User> getUserByLogin(String login);

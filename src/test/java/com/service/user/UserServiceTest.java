@@ -36,13 +36,13 @@ public class UserServiceTest {
 
 
     @Test
-    public void findAllTest() throws EntityNotFoundException {
-        List<User> userList = Arrays.asList(
-                new User(),
-                new User()
-        );
-        when(userRepository.findAll()).thenReturn(userList);
-        assertEquals("find all", 2, userService.findAll().size());
+    public void test_findAll() throws EntityNotFoundException {
+//        List<User> userList = Arrays.asList(
+//                new User(),
+//                new User()
+//        );
+//        when(userRepository.findAll()).thenReturn(userList);
+//        assertEquals("find all", 2, userService.findAll().size());
         verify(userRepository).findAll();
     }
 
