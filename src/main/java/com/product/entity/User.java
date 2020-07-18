@@ -6,8 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /** Created by Islombek Karimov on 16.04.2020. */
-@Entity
-@Table(name = "User")
+@Entity(name = "users")
 public class User extends BaseEntity {
 
   @Column(name = "name", nullable = false)

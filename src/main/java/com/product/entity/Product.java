@@ -4,8 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /** Created by Islombek Karimov on 21.03.2020. */
-@Entity
-@Table(name = "product")
+@Entity(name = "product")
 public class Product extends BaseEntity {
 
   private static final long serialVersionUID = -6291879670469397777L;
@@ -26,7 +25,45 @@ public class Product extends BaseEntity {
   @NotNull(message = "product price can't be null")
   private double price;
 
-  @Column(name = "user_id", nullable = false)
-  @NotNull(message = "userId can't be null")
-  private int userId;
+  public Product() {}
+
+  public static Product of() {
+    return new Product();
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Product setName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public String getBrand() {
+    return brand;
+  }
+
+  public Product setBrand(String brand) {
+    this.brand = brand;
+    return this;
+  }
+
+  public String getMadeIn() {
+    return madeIn;
+  }
+
+  public Product setMadeIn(String madeIn) {
+    this.madeIn = madeIn;
+    return this;
+  }
+
+  public double getPrice() {
+    return price;
+  }
+
+  public Product setPrice(double price) {
+    this.price = price;
+    return this;
+  }
 }
