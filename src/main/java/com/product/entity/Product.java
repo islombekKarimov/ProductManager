@@ -25,6 +25,10 @@ public class Product extends BaseEntity {
   @NotNull(message = "product price can't be null")
   private double price;
 
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
+
   public Product() {}
 
   public static Product of() {
@@ -60,6 +64,15 @@ public class Product extends BaseEntity {
 
   public double getPrice() {
     return price;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public Product setUser(User user) {
+    this.user = user;
+    return this;
   }
 
   public Product setPrice(double price) {

@@ -18,6 +18,8 @@ public class ProductDTO extends BaseDTO {
   @NotEmpty(message = "Price can not be null!")
   private double price;
 
+  private UserDTO userDTO;
+
   public ProductDTO() {}
 
   public static ProductDTO of() {
@@ -28,32 +30,45 @@ public class ProductDTO extends BaseDTO {
     return name;
   }
 
-  public void setName(String name) {
+  public ProductDTO setName(String name) {
     this.name = name;
+    return this;
   }
 
   public String getBrand() {
     return brand;
   }
 
-  public void setBrand(String brand) {
+  public ProductDTO setBrand(String brand) {
     this.brand = brand;
+    return this;
   }
 
   public String getMadeIn() {
     return madeIn;
   }
 
-  public void setMadeIn(String madeIn) {
+  public ProductDTO setMadeIn(String madeIn) {
     this.madeIn = madeIn;
+    return this;
   }
 
   public double getPrice() {
     return price;
   }
 
-  public void setPrice(double price) {
+  public ProductDTO setPrice(double price) {
     this.price = price;
+    return this;
+  }
+
+  public UserDTO getUserDTO() {
+    return userDTO;
+  }
+
+  public ProductDTO setUserDTO(UserDTO userDTO) {
+    this.userDTO = userDTO;
+    return this;
   }
 
   @Override
