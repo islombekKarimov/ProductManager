@@ -13,12 +13,11 @@ import java.util.List;
  */
 @Service
 public interface UserService {
-    User create(User userDTO) throws ConstraintViolationException, EntityNotFoundException;
-    User findById(int id) throws EntityNotFoundException;
-    User update(User userDTO, int id) throws EntityNotFoundException;
+    UserDTO create(User userDTO) throws ConstraintViolationException, EntityNotFoundException;
+    UserDTO get(int id) throws EntityNotFoundException;
+    UserDTO update(User userDTO, int id) throws EntityNotFoundException;
     void delete(int id) throws EntityNotFoundException;
-    List<User> findAll();
-    List<User> getUserByLogin(String login);
+    List<UserDTO> findAll();
 
 
 }

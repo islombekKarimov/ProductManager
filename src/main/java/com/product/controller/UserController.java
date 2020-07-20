@@ -51,14 +51,16 @@ public class UserController {
     @PostMapping(value = {"/save_user"})
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO createUser(@Valid @RequestBody UserDTO userDTO ) throws ConstraintViolationException, EntityNotFoundException {
-        return userService.create(userDTO);
+//        userService.create(userDTO);
+        return null;
     }
 
 
 
     @RequestMapping(value = {"/edit_user/{id}"})
     public UserDTO editUser(@PathVariable(name = "id") int id) throws ConstraintViolationException, EntityNotFoundException {
-        return userService.findById(id);
+//            userService.findById(id);
+        return null;
     }
 
 
