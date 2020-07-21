@@ -10,14 +10,12 @@ import org.springframework.stereotype.Service;
  * @author Islombek Karimov
  * @since 16.07.2020
  */
-@Service
-public class UserConverter extends Converter<UserDTO, User> {
+public class UserConverter {
 
-  public UserConverter() {
-    super(UserConverter::toEntity, UserConverter::toDTO);
-  }
+  public UserConverter() {}
 
-  private static UserDTO toDTO(User entity) {
+  public static UserDTO toDTO(User entity) {
+    if (entity == null) return null;
     UserDTO dto =
         UserDTO.of()
             .setName(entity.getName())
@@ -27,7 +25,8 @@ public class UserConverter extends Converter<UserDTO, User> {
     return dto;
   }
 
-  private static User toEntity(UserDTO dto) {
+  public static User toEntity(UserDTO dto) {
+    if (dto == null) return null;
     User entity =
         User.of().setName(dto.getName()).setLogin(dto.getLogin()).setPassword(dto.getPassword());
     entity.setId(dto.getId());
