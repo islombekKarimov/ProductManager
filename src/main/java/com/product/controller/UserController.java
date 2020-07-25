@@ -1,4 +1,6 @@
 package com.product.controller;
+import static com.product.constant.ApiPath.API_USER;
+
 import com.product.dto.UserDTO;
 import com.product.entity.User;
 import com.product.service.product.ProductService;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
@@ -17,13 +18,16 @@ import javax.validation.Valid;
  * Created by Islombek Karimov on 16.05.2020.
  */
 @RestController
+@RequestMapping(value = API_USER)
 public class UserController {
 
+    private UserService userService;
     @Autowired
-    UserService userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
-    @Autowired
-    ProductService productService;
+    private ProductService productService;
 
 
     @GetMapping(value = {"/registration_page"})
@@ -65,7 +69,7 @@ public class UserController {
 
 
     @RequestMapping(value = {"/delete_user/{id}"})
-    public String deleteUser(@PathVariable(name = "id") int id) {
+    public String deleteUser(@PathVariable(name = "id") Long id) {
         userService.delete(id);
         return "redirect:/user_list";
     }
