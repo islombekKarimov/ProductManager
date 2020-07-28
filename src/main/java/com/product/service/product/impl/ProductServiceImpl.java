@@ -1,5 +1,6 @@
 package com.product.service.product.impl;
 
+import com.product.dto.ProductDTO;
 import com.product.entity.Product;
 import com.product.repository.ProductRepository;
 import com.product.service.product.ProductService;
@@ -14,41 +15,48 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Islombek Karimov on 08.05.2020.
- */
+/** Created by Islombek Karimov on 08.05.2020. */
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    ProductRepository productRepository;
+  private ProductRepository productRepository;
+
+  @Autowired
+  public void setProductRepository(ProductRepository productRepository) {
+    this.productRepository = productRepository;
+  }
 
 
-    @Override
-    public List<Product> getProductList() {
-        return productRepository.findAll();
-    }
+  @Override
+  public ProductDTO create(ProductDTO dto) {
+    return null;
+  }
 
-    @Override
-    public void saveProduct(Product product) throws EntityNotFoundException {
-        productRepository.save(product);
-    }
+  @Override
+  public ProductDTO get(Long id) {
+    return null;
+  }
 
-    @Override
-    public Product getProductById(int id) throws EntityNotFoundException {
-        return productRepository.findById(id).get();
-    }
+  @Override
+  public ProductDTO update(ProductDTO dto)  {
+    return null;
+  }
 
-    @Override
-    public void delete(int id) throws EntityNotFoundException {
-        productRepository.deleteById(id);
-    }
+  @Override
+  public void delete(Long id) {
 
-    @Override
-    public List<Product> getProductListByUserId(int userId) {
-        Session session = HibernateUtil.session();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery(" From Product where userId=:userId", Product.class);
-        query.setParameter("userId", userId);
-        return query.list();
-    }
+  }
+
+  @Override
+  public List<Product> getProductListByUserId(Long userId) {
+    return null;
+  }
+
+//  @Override
+//  public List<Product> getProductListByUserId(int userId) {
+//    Session session = HibernateUtil.session();
+//    Transaction transaction = session.beginTransaction();
+//    Query query = session.createQuery(" From Product where userId=:userId", Product.class);
+//    query.setParameter("userId", userId);
+//    return query.list();
+//  }
 }
