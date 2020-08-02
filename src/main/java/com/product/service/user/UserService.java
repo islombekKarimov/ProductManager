@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /** Created by Islombek Karimov on 25.04.2020. */
-@Service
+
 public interface UserService {
   UserDTO create(UserDTO userDTO);
 

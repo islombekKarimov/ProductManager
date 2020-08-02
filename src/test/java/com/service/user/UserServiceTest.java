@@ -46,22 +46,22 @@ public class UserServiceTest {
         verify(userRepository).findAll();
     }
 
-    @Test
-    public void findByIdTest() throws EntityNotFoundException{
-        User user = new User();
-        when(userRepository.findById(1)).thenReturn(ofNullable(user));
-        User userDTO = userService.findById(1);
-        assertThat(user.getName()).isEqualTo(userDTO.getName());
-    }
+//    @Test
+//    public void findByIdTest() throws EntityNotFoundException{
+//        User user = new User();
+//        when(userRepository.findById(1)).thenReturn(ofNullable(user));
+//        User userDTO = userService.findById(1);
+//        assertThat(user.getName()).isEqualTo(userDTO.getName());
+//    }
 
-    @Test
-    public void deleteTest() throws EntityNotFoundException{
-        User user = new User();
-        when(userRepository.findById(1)).thenReturn(ofNullable(user));
-        userService.delete(1);
-        verify(userRepository).deleteById(1);
-//        assertThat(user.getId().)
-    }
+//    @Test
+//    public void deleteTest() throws EntityNotFoundException{
+//        User user = new User();
+//        when(userRepository.findById(1)).thenReturn(ofNullable(user));
+//        userService.delete(1);
+//        verify(userRepository).deleteById(1);
+////        assertThat(user.getId().)
+//    }
 
 
 
