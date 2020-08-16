@@ -48,7 +48,6 @@ public class UserController {
 
     @PostMapping("/get")
     public ResponseEntity get(@Valid @PathVariable(name = "id") Long id) {
-        System.out.println("================= " + id);
         userService.get(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
