@@ -1,15 +1,15 @@
 package com.product.controller;
 
-import com.product.entity.User;
+import com.product.dto.ProductDTO;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Islombek Karimov on 08.05.2020.
@@ -17,40 +17,42 @@ import java.util.List;
 @RestController
 public class LoginController {
 
-    @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    ProductService productService;
-
-    @GetMapping(value = {"/", "/login"})
-    public String loginPage(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "login";
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
+    private ProductService productService;
 
-    @PostMapping(value = {"/user_login"})
-    public ModelAndView checkUserByLogin(@ModelAttribute(name = "user") User user, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        List<User> userList = userService.getUserByLogin(user.getLogin());
-        if (userList.size() == 0) {
-            bindingResult.rejectValue("login", "error.login", "You don't register");
-            modelAndView.setViewName("login");
-        }
-        if (userList.size() > 0) {
-            for (User listUser : userList) {
-                if (listUser.getLogin().equals(user.getLogin()) && listUser.getPassword().equals(user.getPassword())) {
-//                    int userId = listUser.getId();
-//                    modelAndView.setViewName("redirect:/product_list_by_userId/" + userId);
-                } else {
-                    bindingResult.rejectValue("password", "error.password", "Your Login or Password incorrect");
-                    modelAndView.setViewName("login");
-                }
-            }
-        }
-        return modelAndView;
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity create(@RequestBody ProductDTO productDTO) {
+        productService.create(productDTO);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity update(@RequestBody ProductDTO productDTO) {
+        productService.update(productDTO);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable(name = "id") Long id) {
+        productService.delete(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/get/{id}")
+    public ResponseEntity get(@PathVariable(name = "id") Long id) {
+        productService.get(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 

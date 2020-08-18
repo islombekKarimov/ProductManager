@@ -5,12 +5,16 @@ package com.product.controller;
 import com.product.dto.UserDTO;
 import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 /**
@@ -40,16 +44,21 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity delete(@PathVariable(name = "userId") Long id) {
+    @PostMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable(name = "id") Long id) {
         userService.delete(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/get")
-    public ResponseEntity get(@Valid @PathVariable(name = "id") Long id) {
+    @PostMapping("/get/{id}")
+    public ResponseEntity get(@PathVariable(name = "id") Long id) {
         userService.get(id);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/get-list")
+    public Page<UserDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
+        return userService.findAll(pageable);
     }
 }
 
