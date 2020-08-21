@@ -17,7 +17,7 @@ public class ProductConverter extends Converter<ProductDTO, Product> {
     super(ProductConverter::toEntity, ProductConverter::toDTO);
   }
 
-  private static ProductDTO toDTO(Product entity) {
+  public static ProductDTO toDTO(Product entity) {
     ProductDTO dto =
         ProductDTO.of()
             .setName(entity.getName())
@@ -34,7 +34,7 @@ public class ProductConverter extends Converter<ProductDTO, Product> {
     return dto;
   }
 
-  private static Product toEntity(ProductDTO dto) {
+  public static Product toEntity(ProductDTO dto) {
     Product entity =
         Product.of()
             .setName(dto.getName())
