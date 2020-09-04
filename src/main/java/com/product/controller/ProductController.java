@@ -47,4 +47,10 @@ public class ProductController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @PostMapping("/get/{id}")
+    public ResponseEntity get(@PathVariable(name = "id") Long id) {
+        productService.get(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
 }
