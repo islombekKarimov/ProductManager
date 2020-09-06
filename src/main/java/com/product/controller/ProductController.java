@@ -4,6 +4,9 @@ import com.product.dto.ProductDTO;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +54,11 @@ public class ProductController {
     public ResponseEntity get(@PathVariable(name = "id") Long id) {
         productService.get(id);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/get-list")
+    public Page<ProductDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
+        return productService.findAll(pageable);
     }
 
 }
