@@ -1,7 +1,6 @@
 package com.product.service.product;
 
 import com.product.dto.ProductDTO;
-import com.product.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,5 +16,5 @@ public interface ProductService {
 
     void delete(Long id);
 
-    Page<Product> getProductListByUserId(Pageable pageable, Long userId);
+    Page<ProductDTO> findAll(Pageable pageable);
 }
