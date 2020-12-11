@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> getProductListByUserId(Pageable pageable, Long userId) {
+    public Page<ProductDTO> findAll(Pageable pageable) {
         return null;
     }
 
