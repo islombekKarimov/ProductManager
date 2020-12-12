@@ -1,14 +1,8 @@
 package com.product.controller;
 
-import com.product.dto.ProductDTO;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,29 +25,29 @@ public class LoginController {
         this.productService = productService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity create(@RequestBody ProductDTO productDTO) {
-        productService.create(productDTO);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity create(@RequestBody ProductDTO productDTO) {
+//        productService.create(productDTO);
+//        return ResponseEntity.ok(HttpStatus.OK);
+//    }
 
-    @PostMapping("/update")
-    public ResponseEntity update(@RequestBody ProductDTO productDTO) {
-        productService.update(productDTO);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
+//    @PostMapping("/update")
+//    public ResponseEntity update(@RequestBody ProductDTO productDTO) {
+//        productService.update(productDTO);
+//        return ResponseEntity.ok(HttpStatus.OK);
+//    }
 
-    @PostMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable(name = "id") Long id) {
-        productService.delete(id);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
+//    @PostMapping("/delete/{id}")
+//    public ResponseEntity delete(@PathVariable(name = "id") Long id) {
+//        productService.delete(id);
+//        return ResponseEntity.ok(HttpStatus.OK);
+//    }
 
-    @PostMapping("/get/{id}")
-    public ResponseEntity get(@PathVariable(name = "id") Long id) {
-        productService.get(id);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
+//    @PostMapping("/get/{id}")
+//    public ResponseEntity get(@PathVariable(name = "id") Long id) {
+//        productService.get(id);
+//        return ResponseEntity.ok(HttpStatus.OK);
+//    }
 
 
 }

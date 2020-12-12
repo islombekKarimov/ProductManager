@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO create(ProductDTO dto) {
         Product entity = ProductConverter.toEntity(dto);
-        return ProductConverter.toDTO(entity);
+        return ProductConverter.toDTO(productRepository.save(entity));
     }
 
     @Override
