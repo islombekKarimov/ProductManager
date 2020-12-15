@@ -47,9 +47,8 @@ public class UserController {
     }
 
     @PostMapping("/get/{id}")
-    public ResponseEntity get(@PathVariable(name = "id") Long id) {
-        userService.get(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<Object> get(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(userService.get(id));
     }
 
     @PostMapping("/get-list")
