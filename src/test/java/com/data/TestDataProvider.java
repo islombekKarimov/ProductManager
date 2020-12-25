@@ -3,7 +3,6 @@ package com.data;
 import com.product.entity.Product;
 import com.product.entity.User;
 
-import javax.jws.soap.SOAPBinding;
 
 /**
  * Created by Islombek Karimov on 22.03.2020.

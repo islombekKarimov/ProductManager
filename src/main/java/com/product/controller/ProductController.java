@@ -36,15 +36,10 @@ public class ProductController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-//    @PostMapping("/update")
-//    public ResponseEntity update(@RequestBody ProductDTO dto) {
-//        productService.update(dto);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
-
-    @RequestMapping("/welcome")
-    public String welcomepage() {
-        return "Welcome to Yawin Tutor";
+    @PostMapping("/update")
+    public ResponseEntity update(@RequestBody ProductDTO dto) {
+        productService.update(dto);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/delete/{id}")
@@ -54,9 +49,8 @@ public class ProductController {
     }
 
     @PostMapping("/get/{id}")
-    public ResponseEntity get(@PathVariable(name = "id") Long id) {
-        productService.get(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<Object> get(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(productService.get(id));
     }
 
     @PostMapping("/get-list")

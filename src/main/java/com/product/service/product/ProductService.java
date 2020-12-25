@@ -17,4 +17,6 @@ public interface ProductService {
     void delete(Long id);
 
     Page<ProductDTO> findAll(Pageable pageable);
+
+    Page<ProductDTO> getProductByUser(Pageable pageable, long id);
 }

@@ -55,5 +55,10 @@ public class UserController {
     public Page<UserDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
         return userService.findAll(pageable);
     }
+
+    @PostMapping("/user/products")
+    public Page<UserDTO> getProductList(@PageableDefault(size = 30, value = 0) Pageable pageable){
+        return null;
+    }
 }
 

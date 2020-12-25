@@ -64,6 +64,11 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
+    @Override
+    public Page<ProductDTO> getProductByUser(Pageable pageable, long id) {
+        return null;
+    }
+
     private Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
