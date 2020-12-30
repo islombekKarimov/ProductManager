@@ -1,6 +1,5 @@
 package com.product.controller;
 
-import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +17,12 @@ public class LoginController {
         this.userService = userService;
     }
 
-    private ProductService productService;
+//    private ProductService productService;
 
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
+//    @Autowired
+//    public void setProductService(ProductService productService) {
+//        this.productService = productService;
+//    }
 
 //    @PostMapping("/create")
 //    public ResponseEntity create(@RequestBody ProductDTO productDTO) {

@@ -3,22 +3,23 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-
-        <property name="hibernate.dialect">
-            org.hibernate.dialect.MySQLDialect
-        </property>
-
         <property name="hibernate.connection.driver_class">
-            com.mysql.jdbc.Driver
+            org.postgresql.Driver
         </property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/product-manager</property>
+        <property name="connection.username">product_user</property>
+        <property name="connection.password">1</property>
 
-        <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3306/product_manager
-        </property>
+        <!-- JDBC connection pool (use the build-in) -->
+        <property name="connection.pool_size">1</property>
 
-        <property name="hibernate.connection.username">product_user</property>
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+        <!--        <property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>-->
+        <!--        <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>-->
 
-        <property name="hibernate.connection.password">123</property>
+        <!-- Set "true" to show SQL statements -->
+        <property name="hibernate.show_sql">true</property>
 
         <mapping class="com.product.entity.Product"/>
         <mapping class="com.product.entity.User"/>

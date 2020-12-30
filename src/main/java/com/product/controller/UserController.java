@@ -2,7 +2,9 @@ package com.product.controller;
 
 //import static com.product.constant.ApiPath.API_USER;
 
+import com.product.dto.ProductDTO;
 import com.product.dto.UserDTO;
+import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -22,10 +26,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private UserService userService;
+    private ProductService productService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
     }
 
     @PostMapping("/create")
@@ -56,9 +66,9 @@ public class UserController {
         return userService.findAll(pageable);
     }
 
-    @PostMapping("/user/products")
-    public Page<UserDTO> getProductList(@PageableDefault(size = 30, value = 0) Pageable pageable){
-        return null;
+    @PostMapping("/user-products/{id}")
+    public List<ProductDTO> getProductList(@PathVariable(name = "id") Long id) {
+        return productService.getProductByUserList(id);
     }
 }
 

@@ -4,6 +4,8 @@ import com.product.dto.ProductDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Created by Islombek Karimov on 21.03.2020.
  */
@@ -18,5 +20,5 @@ public interface ProductService {
 
     Page<ProductDTO> findAll(Pageable pageable);
 
-    Page<ProductDTO> getProductByUser(Pageable pageable, long id);
+    List<ProductDTO> getProductByUserList(Long id);
 }
