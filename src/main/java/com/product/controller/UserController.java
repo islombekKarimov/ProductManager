@@ -6,6 +6,7 @@ import com.product.dto.ProductDTO;
 import com.product.dto.UserDTO;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,19 +40,19 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity create(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<Object> create(@RequestBody UserDTO userDTO) {
         userService.create(userDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/update")
-    public ResponseEntity update(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<Object> update(@RequestBody UserDTO userDTO) {
         userService.update(userDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id) {
         userService.delete(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -62,8 +63,13 @@ public class UserController {
     }
 
     @PostMapping("/get-list")
-    public Page<UserDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
-        return userService.findAll(pageable);
+    public Page<UserDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) throws Exception {
+            return userService.findAll(pageable);
+    }
+
+    @PostMapping("/list")
+    public ResponseEntity<Object> getProductList() {
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/user-products/{id}")

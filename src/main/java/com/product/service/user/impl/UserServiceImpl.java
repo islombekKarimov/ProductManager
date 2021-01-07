@@ -5,19 +5,16 @@ import com.product.dto.UserDTO;
 import com.product.entity.User;
 import com.product.repository.UserRepository;
 import com.product.service.user.UserService;
-import com.product.util.HibernateUtil;
+
 import java.util.Optional;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 /** Created by Islombek Karimov on 08.05.2020. */
 @Service
@@ -64,7 +61,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public Page<UserDTO> findAll(Pageable pageable) {
+  public Page<UserDTO> findAll(Pageable pageable) throws Exception {
     return  userRepository.findAll(pageable).map(UserConverter::toDTO);
   }
 
