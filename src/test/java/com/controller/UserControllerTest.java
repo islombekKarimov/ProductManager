@@ -22,6 +22,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /** Created by Islombek Karimov on 21.06.2020. */
+
+
 @SpringBootTest(
     classes = ProductManagerApplication.class,
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -76,6 +78,12 @@ public class UserControllerTest {
         .andExpect(status().isOk());
   }
 
+  @Test
+  public void testProductByUser() throws Exception {
+    mockMvc
+        .perform(post("/user-products/{id}", userId).contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk());
+  }
 
   //TODO change controller method
 //  @Test
