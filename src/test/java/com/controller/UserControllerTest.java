@@ -22,8 +22,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /** Created by Islombek Karimov on 21.06.2020. */
-
-
 @SpringBootTest(
     classes = ProductManagerApplication.class,
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -45,7 +43,7 @@ public class UserControllerTest {
   }
 
   @Test
-  public void testCreate() throws Exception {
+  public void test_create() throws Exception {
     mockMvc
         .perform(
             post("/api/user/create")
@@ -55,7 +53,7 @@ public class UserControllerTest {
   }
 
   @Test
-  public void testUpdate() throws Exception {
+  public void test_update() throws Exception {
     mockMvc
         .perform(
             post("/api/user/update")
@@ -65,44 +63,38 @@ public class UserControllerTest {
   }
 
   @Test
-  public void testDelete() throws Exception {
+  public void test_delete() throws Exception {
     mockMvc
         .perform(post("/api/user/delete/{id}", userId).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 
   @Test
-  public void testGet() throws Exception {
+  public void test_get() throws Exception {
     mockMvc
         .perform(post("/api/user/get/{id}", userId).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 
-  @Test
-  public void testProductByUser() throws Exception {
-    mockMvc
-        .perform(post("/user-products/{id}", userId).contentType(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk());
-  }
+  // TODO check controller
+  //  @Test
+  //  public void test_product_by_user() throws Exception {
+  //    mockMvc
+  //        .perform(post("/user-products/{id}", userId).contentType(MediaType.APPLICATION_JSON))
+  //        .andExpect(status().isOk());
+  //  }
 
-  //TODO change controller method
-//  @Test
-//  public void testGetList() throws Exception {
-//    mockMvc
-//        .perform(
-//            post("/api/user/get-list")
-//                .param("page", "1")
-//                .param("size", "30")
-//                .contentType(MediaType.APPLICATION_JSON))
-//        .andExpect(status().isOk());
-//  }
-
-  @Test
-  public void testUserList() throws Exception {
-    mockMvc
-        .perform(post("/api/user/list").contentType(MediaType.APPLICATION_JSON_VALUE))
-        .andExpect(status().isOk());
-  }
+  // TODO change controller method
+  //  @Test
+  //  public void testGetList() throws Exception {
+  //    mockMvc
+  //        .perform(
+  //            post("/api/user/get-list")
+  //                .param("page", "1")
+  //                .param("size", "30")
+  //                .contentType(MediaType.APPLICATION_JSON))
+  //        .andExpect(status().isOk());
+  //  }
 
   private UserDTO createUserDto() {
     UserDTO userDTO = new UserDTO();
