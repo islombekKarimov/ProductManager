@@ -6,7 +6,6 @@ import com.product.dto.ProductDTO;
 import com.product.dto.UserDTO;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -65,11 +64,6 @@ public class UserController {
     @PostMapping("/get-list")
     public Page<UserDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) throws Exception {
             return userService.findAll(pageable);
-    }
-
-    @PostMapping("/list")
-    public ResponseEntity<Object> getProductList() {
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/user-products/{id}")

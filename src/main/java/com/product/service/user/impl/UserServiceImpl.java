@@ -5,9 +5,6 @@ import com.product.dto.UserDTO;
 import com.product.entity.User;
 import com.product.repository.UserRepository;
 import com.product.service.user.UserService;
-
-import java.util.Optional;
-
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 /** Created by Islombek Karimov on 08.05.2020. */
 @Service
