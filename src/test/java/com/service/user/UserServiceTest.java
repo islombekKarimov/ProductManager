@@ -1,5 +1,6 @@
 package com.service.user;
 
+import com.data.TestDataProvider;
 import com.product.ProductManagerApplication;
 import com.product.dto.UserDTO;
 import com.product.entity.User;
@@ -40,8 +41,8 @@ public class UserServiceTest {
 
   @Test
   public void test_create() {
-    UserDTO userDTO = createUserDto();
-    User user = createUser();
+    UserDTO userDTO = TestDataProvider.createUserDTO();
+    User user = TestDataProvider.createUser();
     when(userRepository.save(any())).thenReturn(user);
     UserDTO result = userService.create(userDTO);
     assertNotNull(result);
@@ -51,8 +52,10 @@ public class UserServiceTest {
 
   @Test
   public void test_update() {
-    UserDTO userDTO = createUserDto();
-    User user = createUser();
+    UserDTO userDTO = TestDataProvider.createUserDTO();
+    userDTO.setId(userId);
+    User user = TestDataProvider.createUser();
+    user.setId(userId);
     Optional<User> userOptional = Optional.of(user);
     when(userRepository.findById(userDTO.getId())).thenReturn(userOptional);
     when(userRepository.save(any())).thenReturn(user);
@@ -77,7 +80,7 @@ public class UserServiceTest {
 
   @Test
   public void test_get() {
-    User user = createUser();
+    User user = TestDataProvider.createUser();
     Optional<User> userOptional = Optional.of(user);
     when(userRepository.findById(anyLong())).thenReturn(userOptional);
     UserDTO result = userService.get(userId);
@@ -85,27 +88,7 @@ public class UserServiceTest {
     verify(userRepository, times(1)).findById(anyLong());
   }
 
-  //TODO find out
+  // TODO find out
   @Test
-  public void test_getFindAll(){
-  }
-
-  private UserDTO createUserDto() {
-    UserDTO userDTO = new UserDTO();
-    userDTO.setId(userId);
-    userDTO.setName("USER");
-    userDTO.setLogin("LOGIN");
-    userDTO.setPassword("PASSWORD");
-    return userDTO;
-  }
-
-  private User createUser() {
-    User user = new User();
-    user.setId(userId);
-    user.setName("USER");
-    user.setLogin("LOGIN");
-    user.setPassword("PASSWORD");
-    return user;
-  }
-
+  public void test_getFindAll() {}
 }

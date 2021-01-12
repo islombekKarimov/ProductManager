@@ -1,10 +1,8 @@
 package com.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.data.TestDataProvider;
 import com.product.ProductManagerApplication;
 import com.product.controller.UserController;
-import com.product.dto.UserDTO;
 import com.product.service.user.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +46,7 @@ public class UserControllerTest {
         .perform(
             post("/api/user/create")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(mapToJson(createUserDto())))
+                .content(TestDataProvider.mapToJson(TestDataProvider.createUserDTO())))
         .andExpect(status().isOk());
   }
 
@@ -58,7 +56,7 @@ public class UserControllerTest {
         .perform(
             post("/api/user/update")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(mapToJson(createUserDto())))
+                .content(TestDataProvider.mapToJson(TestDataProvider.createUserDTO())))
         .andExpect(status().isOk());
   }
 
@@ -96,17 +94,17 @@ public class UserControllerTest {
   //        .andExpect(status().isOk());
   //  }
 
-  private UserDTO createUserDto() {
-    UserDTO userDTO = new UserDTO();
-    userDTO.setId(userId);
-    userDTO.setName("USER");
-    userDTO.setLogin("LOGIN");
-    userDTO.setPassword("PASSWORD");
-    return userDTO;
-  }
+  //  private UserDTO createUserDto() {
+  //    UserDTO userDTO = new UserDTO();
+  //    userDTO.setId(userId);
+  //    userDTO.setName("USER");
+  //    userDTO.setLogin("LOGIN");
+  //    userDTO.setPassword("PASSWORD");
+  //    return userDTO;
+  //  }
 
-  private String mapToJson(Object obj) throws JsonProcessingException {
-    ObjectMapper objectMapper = new ObjectMapper();
-    return objectMapper.writeValueAsString(obj);
-  }
+  //  private String mapToJson(Object obj) throws JsonProcessingException {
+  //    ObjectMapper objectMapper = new ObjectMapper();
+  //    return objectMapper.writeValueAsString(obj);
+  //  }
 }

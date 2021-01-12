@@ -1,13 +1,14 @@
 package com.service.product;
 
+import com.data.TestDataProvider;
 import com.product.ProductManagerApplication;
 import com.product.dto.ProductDTO;
-import com.product.dto.UserDTO;
 import com.product.entity.Product;
-import com.product.entity.User;
 import com.product.repository.ProductRepository;
 import com.product.service.product.ProductService;
 import com.product.service.product.impl.ProductServiceImpl;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,6 +16,14 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 /** Created by Islombek Karimov on 22.06.2020. */
 @SpringBootTest(
@@ -32,29 +41,57 @@ public class ProductServiceTest {
 
   @InjectMocks private ProductService productService = new ProductServiceImpl();
 
-  private ProductDTO createProductDTO() {
-    ProductDTO productDTO = new ProductDTO();
-    productDTO.setId(productId);
-    productDTO.setName("NAME");
-    productDTO.setBrand("BRAND");
-    productDTO.setMadeIn("MADE_IN");
-    productDTO.setPrice(1000.0);
-    UserDTO userDTO = new UserDTO();
-    userDTO.setId(userId);
-    productDTO.setUserDTO(userDTO);
-    return productDTO;
+  @Test
+  public void test_create() {
+    ProductDTO productDTO = TestDataProvider.createProductDTO();
+    Product product = TestDataProvider.createProduct();
+    when(productRepository.save(any())).thenReturn(product);
+    ProductDTO result = productService.create(productDTO);
+    assertNotNull(result);
+    assertEquals(result.getName(), product.getName());
+    verify(productRepository, times(1)).save(any());
   }
 
-  private Product createProduct() {
-    Product product = new Product();
+  @Test
+  public void test_update() {
+    Product product = TestDataProvider.createProduct();
     product.setId(productId);
-    product.setName("NAME");
-    product.setBrand("BRAND");
-    product.setMadeIn("MADE_IN");
-    product.setPrice(1000.0);
-    User user = new User();
-    user.setId(userId);
-    product.setUser(user);
-    return product;
+    ProductDTO productDTO = TestDataProvider.createProductDTO();
+    productDTO.setId(productId);
+    Optional<Product> productOptional = Optional.of(product);
+    when(productRepository.findById(productId)).thenReturn(productOptional);
+    when(productRepository.save(any())).thenReturn(product);
+    ProductDTO result = productService.update(productDTO);
+    assertNotNull(result);
+    assertEquals(result.getId(), product.getId());
+    assertEquals(result.getName(), product.getName());
+    assertEquals(result.getBrand(), product.getBrand());
+    verify(productRepository, times(1)).save(any());
   }
+
+  @Test
+  public void test_delete() {
+    productService.delete(productId);
+    verify(productRepository, times(1)).deleteById(productId);
+  }
+
+  @Test
+  public void test_getNotFound() {
+    when(productRepository.findById(productId)).thenReturn(Optional.empty());
+    Assertions.assertThrows(EntityNotFoundException.class, () -> productService.get(productId));
+  }
+
+  @Test
+  public void test_get() {
+    Product product = TestDataProvider.createProduct();
+    Optional<Product> productOptional = Optional.of(product);
+    when(productRepository.findById(productId)).thenReturn(productOptional);
+    ProductDTO result = productService.get(productId);
+    assertNotNull(result);
+    verify(productRepository, times(1)).findById(productId);
+  }
+
+  // TODO find out
+  @Test
+  public void test_findAll() {}
 }

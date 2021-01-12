@@ -1,11 +1,8 @@
 package com.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.data.TestDataProvider;
 import com.product.ProductManagerApplication;
 import com.product.controller.ProductController;
-import com.product.dto.ProductDTO;
-import com.product.dto.UserDTO;
 import com.product.service.product.ProductService;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +49,7 @@ public class ProductControllerTest {
         .perform(
             post("/api/product/create")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(mapToJson(createProduct())))
+                .content(TestDataProvider.mapToJson(TestDataProvider.createProduct())))
         .andExpect(status().isOk());
   }
 
@@ -62,7 +59,7 @@ public class ProductControllerTest {
         .perform(
             post("/api/product/update")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(mapToJson(createProduct())))
+                .content(TestDataProvider.mapToJson(TestDataProvider.createProduct())))
         .andExpect(status().isOk());
   }
 
@@ -79,23 +76,5 @@ public class ProductControllerTest {
     mockMvc
         .perform(post("/api/product/get/{id}", productId).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
-  }
-
-  private ProductDTO createProduct() {
-    ProductDTO productDTO = new ProductDTO();
-    productDTO.setId(productId);
-    productDTO.setName("NAME");
-    productDTO.setBrand("BRAND");
-    productDTO.setMadeIn("MADE_IN");
-    productDTO.setPrice(1000.0);
-    UserDTO userDTO = new UserDTO();
-    userDTO.setId(userId);
-    productDTO.setUserDTO(userDTO);
-    return productDTO;
-  }
-
-  private String mapToJson(Object obj) throws JsonProcessingException {
-    ObjectMapper objectMapper = new ObjectMapper();
-    return objectMapper.writeValueAsString(obj);
   }
 }
