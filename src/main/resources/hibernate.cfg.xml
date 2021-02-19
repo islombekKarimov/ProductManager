@@ -15,8 +15,6 @@
 
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
-        <!--        <property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>-->
-        <!--        <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>-->
 
         <!-- Set "true" to show SQL statements -->
         <property name="hibernate.show_sql">true</property>
