@@ -54,7 +54,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.get(id));
     }
 
-    @PostMapping("/get-list")
+    @GetMapping("/get-list")
     public Page<ProductDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
         return productService.findAll(pageable);
     }

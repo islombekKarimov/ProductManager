@@ -2,6 +2,7 @@ package com.product.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /** Created by Islombek Karimov on 21.03.2020. */
 @Entity(name = "product")
@@ -28,6 +29,9 @@ public class Product extends BaseEntity {
   @ManyToOne
   @JoinColumn(name = "user_id")
   private User user;
+
+  @Column(name = "created_date")
+  private LocalDateTime localDateTime;
 
   public Product() {}
 
@@ -79,4 +83,14 @@ public class Product extends BaseEntity {
     this.price = price;
     return this;
   }
+
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public Product setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+        return this;
+    }
 }

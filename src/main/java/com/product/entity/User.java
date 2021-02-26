@@ -22,6 +22,9 @@ public class User extends BaseEntity {
   @Length(min = 3)
   private String password;
 
+  @Column(name = "role", nullable = false)
+  private String role;
+
   public User() {}
 
   public static User of() {
@@ -54,4 +57,13 @@ public class User extends BaseEntity {
     this.password = password;
     return this;
   }
+
+    public String getRole() {
+        return role;
+    }
+
+    public User setRole(String role) {
+        this.role = role;
+        return this;
+    }
 }

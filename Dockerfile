@@ -1,3 +1,4 @@
-FROM tomcat:8.0-jre8-alpine
+FROM tomcat:9.0.2-jre8-alpine
 EXPOSE 8080
-COPY web/target/product.war /usr/local/tomcat/webapps/
+COPY target/product.war /usr/local/tomcat/webapps/
+CMD ["catalina.sh", "run"]
