@@ -13,9 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.product.constant.ApiPath.API_PRODUCT;
+
 /** Created by Islombek Karimov on 16.05.2020. */
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = API_PRODUCT)
 public class UserController {
 
   private UserService userService;
@@ -29,11 +31,6 @@ public class UserController {
   @Autowired
   public void setProductService(ProductService productService) {
     this.productService = productService;
-  }
-
-  @GetMapping("/test")
-  public ResponseEntity<Object> test() {
-    return ResponseEntity.ok(HttpStatus.OK);
   }
 
   @PostMapping("/create")

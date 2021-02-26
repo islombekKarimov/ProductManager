@@ -11,11 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.product.constant.ApiPath.API_USER;
+
 /**
  * Created by Islombek Karimov on 21.03.2020.
  */
 @RestController
-@RequestMapping(value = "/api/product")
+@RequestMapping(value = API_USER)
 public class ProductController {
 
     private ProductService productService;

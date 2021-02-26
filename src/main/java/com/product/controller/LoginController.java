@@ -17,36 +17,4 @@ public class LoginController {
         this.userService = userService;
     }
 
-//    private ProductService productService;
-
-//    @Autowired
-//    public void setProductService(ProductService productService) {
-//        this.productService = productService;
-//    }
-
-//    @PostMapping("/create")
-//    public ResponseEntity create(@RequestBody ProductDTO productDTO) {
-//        productService.create(productDTO);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
-
-//    @PostMapping("/update")
-//    public ResponseEntity update(@RequestBody ProductDTO productDTO) {
-//        productService.update(productDTO);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
-
-//    @PostMapping("/delete/{id}")
-//    public ResponseEntity delete(@PathVariable(name = "id") Long id) {
-//        productService.delete(id);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
-
-//    @PostMapping("/get/{id}")
-//    public ResponseEntity get(@PathVariable(name = "id") Long id) {
-//        productService.get(id);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
-
-
 }
