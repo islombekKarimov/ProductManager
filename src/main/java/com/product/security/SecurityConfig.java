@@ -3,6 +3,7 @@ package com.product.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -39,11 +40,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
         .and()
-        .exceptionHandling();
+        .exceptionHandling()
+        .disable()
+        .authorizeRequests()
+        .antMatchers("/admin/**")
+        .hasRole("ADMIN")
+        .antMatchers("/anonymous*")
+        .anonymous()
+        .antMatchers("/login*")
+        .permitAll()
+        .anyRequest()
+        .authenticated();
   }
 
   @Bean
   PasswordEncoder bCryptPasswordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  @Override
+  protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+    auth.inMemoryAuthentication()
+        .withUser("user")
+        .password(bCryptPasswordEncoder().encode("userPass"))
+        .roles("USER")
+        .and()
+        .withUser("admin")
+        .password(bCryptPasswordEncoder().encode("adminPass"))
+        .roles("ADMIN");
   }
 }
