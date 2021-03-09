@@ -1,6 +1,5 @@
 package com.product.controller;
 
-// import static com.product.constant.ApiPath.API_USER;
 
 import com.product.dto.UserDTO;
 import com.product.service.product.ProductService;

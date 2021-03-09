@@ -1,7 +1,8 @@
 package com.product.dto;
 
-import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /** Created by Islombek Karimov on 05.07.2020. */
 public class ProductDTO extends BaseDTO {
@@ -19,6 +20,8 @@ public class ProductDTO extends BaseDTO {
   private double price;
 
   private UserDTO userDTO;
+
+  private LocalDateTime createdDate;
 
   public ProductDTO() {}
 
@@ -71,7 +74,16 @@ public class ProductDTO extends BaseDTO {
     return this;
   }
 
-  @Override
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public ProductDTO setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;

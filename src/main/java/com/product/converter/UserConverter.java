@@ -2,7 +2,6 @@ package com.product.converter;
 
 import com.product.dto.UserDTO;
 import com.product.entity.User;
-import org.springframework.stereotype.Service;
 
 /**
  * UserConvertor.

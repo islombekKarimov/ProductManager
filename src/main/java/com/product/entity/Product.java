@@ -31,7 +31,7 @@ public class Product extends BaseEntity {
   private User user;
 
   @Column(name = "created_date")
-  private LocalDateTime localDateTime;
+  private LocalDateTime createdDate;
 
   public Product() {}
 
@@ -84,13 +84,12 @@ public class Product extends BaseEntity {
     return this;
   }
 
+  public LocalDateTime getCreatedDate() {
+    return createdDate;
+  }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
-    }
-
-    public Product setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
-        return this;
-    }
+  public Product setCreatedDate(LocalDateTime createdDate) {
+    this.createdDate = createdDate;
+    return this;
+  }
 }

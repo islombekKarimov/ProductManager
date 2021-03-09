@@ -23,7 +23,8 @@ public class ProductConverter extends Converter<ProductDTO, Product> {
             .setName(entity.getName())
             .setBrand(entity.getBrand())
             .setMadeIn(entity.getBrand())
-            .setPrice(entity.getPrice());
+            .setPrice(entity.getPrice())
+            .setCreatedDate(entity.getCreatedDate());
     User user = entity.getUser();
     if (user != null) {
       UserDTO userDTO = UserDTO.of();
@@ -40,7 +41,8 @@ public class ProductConverter extends Converter<ProductDTO, Product> {
             .setName(dto.getName())
             .setBrand(dto.getBrand())
             .setMadeIn(dto.getMadeIn())
-            .setPrice(dto.getPrice());
+            .setPrice(dto.getPrice())
+            .setCreatedDate(dto.getCreatedDate());
     UserDTO userDTO = dto.getUserDTO();
     if (userDTO != null) {
       User user = User.of();
