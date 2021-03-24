@@ -61,8 +61,8 @@ public class UserController {
     return userService.findAll(pageable);
   }
 
-  @PostMapping("/user-products/{id}")
-  public ResponseEntity<Object> getProductList(@PathVariable(name = "id") Long id) {
+  @PostMapping("/user-products")
+  public ResponseEntity<Object> getProductList(@RequestParam(name = "id") Long id) {
     return ResponseEntity.ok(productService.getProductByUserList(id));
   }
 }

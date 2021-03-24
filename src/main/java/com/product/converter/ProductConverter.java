@@ -5,6 +5,9 @@ import com.product.dto.UserDTO;
 import com.product.entity.Product;
 import com.product.entity.User;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * ProductConvertor.
  *
@@ -51,5 +54,11 @@ public class ProductConverter extends Converter<ProductDTO, Product> {
     }
     entity.setId(dto.getId());
     return entity;
+  }
+
+  public static List<ProductDTO> entityListToDtoList(List<Product> productList) {
+    return productList != null
+        ? productList.stream().map(ProductConverter::toDTO).collect(Collectors.toList())
+        : null;
   }
 }

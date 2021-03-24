@@ -5,17 +5,12 @@ import com.product.dto.ProductDTO;
 import com.product.entity.Product;
 import com.product.repository.ProductRepository;
 import com.product.service.product.ProductService;
-import com.product.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -73,12 +68,13 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public List<ProductDTO> getProductByUserList(Long id) {
-    Session session = HibernateUtil.session();
-    Transaction transaction = session.beginTransaction();
-    Query query = session.createQuery(" From product where user.id=:userId", Product.class);
-    query.setParameter("userId", id);
-    //        session.close();
-    return query.list();
+    //    Session session = HibernateUtil.session();
+    //    Transaction transaction = session.beginTransaction();
+    //    Query query = session.createQuery(" From product where user.id=:userId", Product.class);
+    //    query.setParameter("userId", id);
+    //    //        session.close();
+    //    return query.list();
+    return ProductConverter.entityListToDtoList(productRepository.findByUser(id));
   }
 
   private Optional<Product> findById(Long id) {

@@ -3,6 +3,9 @@ package com.product.converter;
 import com.product.dto.UserDTO;
 import com.product.entity.User;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * UserConvertor.
  *
@@ -30,5 +33,11 @@ public class UserConverter {
         User.of().setName(dto.getName()).setLogin(dto.getLogin()).setPassword(dto.getPassword());
     entity.setId(dto.getId());
     return entity;
+  }
+
+  public static List<UserDTO> entityListToDtoList(List<User> userList) {
+    return userList != null
+        ? userList.stream().map(UserConverter::toDTO).collect(Collectors.toList())
+        : null;
   }
 }
