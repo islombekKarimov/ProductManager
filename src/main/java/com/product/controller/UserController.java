@@ -12,11 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.product.constant.ApiPath.API_PRODUCT;
+import static com.product.constant.ApiPath.API_USER;
 
 /** Created by Islombek Karimov on 16.05.2020. */
 @RestController
-@RequestMapping(value = API_PRODUCT)
+@RequestMapping(value = API_USER)
 public class UserController {
 
   private UserService userService;
