@@ -1,5 +1,6 @@
 package com.product.security;
 
+import com.product.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,10 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
   @Override
   @Bean
   protected UserDetailsService userDetailsService() {
-    UserDetails user = User.builder()
+    UserDetails user =
+        User.builder()
             .username("user")
             .password(passwordEncoder.encode("admin"))
-            .roles("ADMIN")
+            .roles(Role.ADMIN.name())
             .build();
     return new InMemoryUserDetailsManager(user);
   }
