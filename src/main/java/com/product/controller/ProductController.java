@@ -34,24 +34,24 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity create(@RequestBody ProductDTO dto) {
+    public ResponseEntity<Object> create(@RequestBody ProductDTO dto) {
         productService.create(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/update")
-    public ResponseEntity update(@RequestBody ProductDTO dto) {
+    public ResponseEntity<Object> update(@RequestBody ProductDTO dto) {
         productService.update(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id) {
         productService.delete(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/get/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Object> get(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(productService.get(id));
     }

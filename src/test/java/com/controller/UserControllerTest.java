@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /** Created by Islombek Karimov on 21.06.2020. */
@@ -63,14 +64,14 @@ public class UserControllerTest {
   @Test
   public void test_delete() throws Exception {
     mockMvc
-        .perform(post("/api/user/delete/{id}", userId).contentType(MediaType.APPLICATION_JSON))
+        .perform(get("/api/user/delete/{id}", userId).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 
   @Test
   public void test_get() throws Exception {
     mockMvc
-        .perform(post("/api/user/get/{id}", userId).contentType(MediaType.APPLICATION_JSON))
+        .perform(get("/api/user/get/{id}", userId).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 
@@ -94,17 +95,4 @@ public class UserControllerTest {
   //        .andExpect(status().isOk());
   //  }
 
-  //  private UserDTO createUserDto() {
-  //    UserDTO userDTO = new UserDTO();
-  //    userDTO.setId(userId);
-  //    userDTO.setName("USER");
-  //    userDTO.setLogin("LOGIN");
-  //    userDTO.setPassword("PASSWORD");
-  //    return userDTO;
-  //  }
-
-  //  private String mapToJson(Object obj) throws JsonProcessingException {
-  //    ObjectMapper objectMapper = new ObjectMapper();
-  //    return objectMapper.writeValueAsString(obj);
-  //  }
 }

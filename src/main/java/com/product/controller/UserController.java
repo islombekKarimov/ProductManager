@@ -44,24 +44,24 @@ public class UserController {
     return ResponseEntity.ok(HttpStatus.OK);
   }
 
-  @PostMapping("/delete/{id}")
+  @GetMapping("/delete/{id}")
   public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id) {
     userService.delete(id);
     return ResponseEntity.ok(HttpStatus.OK);
   }
 
-  @PostMapping("/get/{id}")
+  @GetMapping("/get/{id}")
   public ResponseEntity<Object> get(@PathVariable(name = "id") Long id) {
     return ResponseEntity.ok(userService.get(id));
   }
 
-  @PostMapping("/get-list")
+  @GetMapping("/get-list")
   public Page<UserDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable)
       throws Exception {
     return userService.findAll(pageable);
   }
 
-  @PostMapping("/user-products")
+  @GetMapping("/user-products")
   public ResponseEntity<Object> getProductList(@RequestParam(name = "id") Long id) {
     return ResponseEntity.ok(productService.getProductByUserList(id));
   }

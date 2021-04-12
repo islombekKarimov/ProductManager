@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /** Created by Islombek Karimov on 22.03.2020. */
@@ -67,14 +68,14 @@ public class ProductControllerTest {
   public void test_delete() throws Exception {
     mockMvc
         .perform(
-            post("/api/product/delete/{id}", productId).contentType(MediaType.APPLICATION_JSON))
+            get("/api/product/delete/{id}", productId).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 
   @Test
   public void test_get() throws Exception {
     mockMvc
-        .perform(post("/api/product/get/{id}", productId).contentType(MediaType.APPLICATION_JSON))
+        .perform(get("/api/product/get/{id}", productId).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
   }
 }
