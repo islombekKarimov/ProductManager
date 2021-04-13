@@ -18,22 +18,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
-    private final PasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
+  @Autowired
+  public SecurityConfig(PasswordEncoder passwordEncoder) {
+    this.passwordEncoder = passwordEncoder;
+  }
 
-    @Override
+  @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        .antMatchers("/swagger-ui.html/**/*", "/api/product/get-list")
+        .antMatchers("/swagger-ui.html/**/*")
         .permitAll()
         .anyRequest()
         .authenticated()
         .and()
         .httpBasic();
+
   }
 
   @Override
@@ -43,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         User.builder()
             .username("user")
             .password(passwordEncoder.encode("admin"))
-            .roles(Role.ADMIN.name())
+            //            .roles(Role.ADMIN.name())
+            .authorities(Role.ADMIN.getSimpleGrantedAuthorities())
             .build();
     return new InMemoryUserDetailsManager(user);
   }
-
 }
