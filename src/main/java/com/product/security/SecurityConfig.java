@@ -29,19 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-      http
-              .csrf().disable()
-              .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-              .and()
-              .addFilter(new UserCredentials(authenticationManager()))
-              .authorizeRequests()
-              .antMatchers("/swagger-ui.html/**/*")
-              .permitAll()
-              .anyRequest()
-              .authenticated()
-              .and()
-              .httpBasic();
-
+    http.csrf()
+        .disable()
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .addFilter(new UserCredentials(authenticationManager()))
+        .authorizeRequests()
+        //              .antMatchers("/swagger-ui.html/**/*")
+        //              .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .formLogin()
+        .and()
+        .httpBasic();
   }
 
   @Override
