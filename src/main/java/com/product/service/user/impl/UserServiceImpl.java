@@ -9,6 +9,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -18,7 +19,10 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
+  @Autowired
+  private PasswordEncoder passwordEncoder;
   private UserRepository userRepository;
+
 
   @Autowired
   public void setUserRepository(UserRepository userRepository) {
@@ -28,7 +32,9 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDTO create(UserDTO userDTO)
       throws ConstraintViolationException, EntityNotFoundException {
+    userDTO.setLogin(passwordEncoder.encode(userDTO.getLogin()));
     User entity = UserConverter.toEntity(userDTO);
+
     return UserConverter.toDTO(userRepository.save(entity));
   }
 
@@ -48,7 +54,7 @@ public class UserServiceImpl implements UserService {
     if (optional.isPresent()) {
       User entity = UserConverter.toEntity(userDTO);
       return UserConverter.toDTO(userRepository.save(entity));
-    }else {
+    } else {
       throw new EntityNotFoundException();
     }
   }
@@ -60,10 +66,21 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Page<UserDTO> findAll(Pageable pageable) throws Exception {
-    return  userRepository.findAll(pageable).map(UserConverter::toDTO);
+    return userRepository.findAll(pageable).map(UserConverter::toDTO);
   }
 
-  private Optional<User> findById(Long id) {
+    @Override
+    public Optional<User> findUserByLogin(String login) {
+        Optional<User> optional = userRepository.findByLogin(login);
+        if(optional.isPresent()){
+            return optional;
+        }
+        else {
+            throw new EntityNotFoundException();
+        }
+    }
+
+    private Optional<User> findById(Long id) {
     return userRepository.findById(id);
   }
 

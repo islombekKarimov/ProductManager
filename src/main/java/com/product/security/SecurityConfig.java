@@ -1,7 +1,6 @@
 package com.product.security;
 
-import com.product.enums.Role;
-import com.product.security.jwt.UserCredentials;
+import com.product.security.jwt.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,53 +8,36 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
-  private final PasswordEncoder passwordEncoder;
-
   @Autowired
-  public SecurityConfig(PasswordEncoder passwordEncoder) {
-    this.passwordEncoder = passwordEncoder;
-  }
+  private  JwtTokenFilter jwtTokenFilter;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf()
+    http.httpBasic()
+        .disable()
+        .csrf()
         .disable()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .addFilter(new UserCredentials(authenticationManager()))
         .authorizeRequests()
-        //              .antMatchers("/swagger-ui.html/**/*")
-        //              .permitAll()
-        .anyRequest()
-        .authenticated()
+        .antMatchers("/api/user/*", "/auth")
+        .permitAll()
         .and()
-        .formLogin()
-        .and()
-        .httpBasic();
+        .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
-  @Override
   @Bean
-  protected UserDetailsService userDetailsService() {
-    UserDetails user =
-        User.builder()
-            .username("user")
-            .password(passwordEncoder.encode("admin"))
-            //            .roles(Role.ADMIN.name())
-            .authorities(Role.ADMIN.getSimpleGrantedAuthorities())
-            .build();
-    return new InMemoryUserDetailsManager(user);
+  public PasswordEncoder encoder() {
+    return new BCryptPasswordEncoder();
   }
 }

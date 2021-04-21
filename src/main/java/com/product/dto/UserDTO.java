@@ -14,6 +14,8 @@ public class UserDTO extends BaseDTO {
 
   private String password;
 
+  private String role;
+
   public UserDTO() {}
 
   public static UserDTO of() {
@@ -46,4 +48,13 @@ public class UserDTO extends BaseDTO {
     this.password = password;
     return this;
   }
+
+    public String getRole() {
+        return role;
+    }
+
+    public UserDTO setRole(String role) {
+        this.role = role;
+        return this;
+    }
 }

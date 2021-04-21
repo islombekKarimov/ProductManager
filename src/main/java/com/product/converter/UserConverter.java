@@ -22,7 +22,8 @@ public class UserConverter {
         UserDTO.of()
             .setName(entity.getName())
             .setLogin(entity.getLogin())
-            .setPassword(entity.getPassword());
+            .setPassword(entity.getPassword())
+            .setRole(entity.getRole());
     dto.setId(entity.getId());
     return dto;
   }
@@ -30,7 +31,10 @@ public class UserConverter {
   public static User toEntity(UserDTO dto) {
     if (dto == null) return null;
     User entity =
-        User.of().setName(dto.getName()).setLogin(dto.getLogin()).setPassword(dto.getPassword());
+        User.of().setName(dto.getName())
+                .setLogin(dto.getLogin())
+                .setPassword(dto.getPassword())
+            .setRole(dto.getRole());
     entity.setId(dto.getId());
     return entity;
   }
