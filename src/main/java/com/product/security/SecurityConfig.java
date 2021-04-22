@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers("/api/user/*", "/auth")
+        .antMatchers("/api/user/create", "/auth")
         .permitAll()
         .and()
         .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

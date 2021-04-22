@@ -28,14 +28,6 @@ public class JwtTokenFilter extends GenericFilterBean {
   @Autowired
   private ApplicationUserDetailsService detailsService;
 
-//  public void setJwtTokenProvider(JwtTokenProvider jwtTokenProvider) {
-//    this.jwtTokenProvider = jwtTokenProvider;
-//  }
-//
-//  public void setDetailsService(ApplicationUserDetailsService detailsService) {
-//    this.detailsService = detailsService;
-//  }
-
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {

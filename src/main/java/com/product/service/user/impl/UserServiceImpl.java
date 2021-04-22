@@ -19,10 +19,8 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  @Autowired private PasswordEncoder passwordEncoder;
   private UserRepository userRepository;
-
 
   @Autowired
   public void setUserRepository(UserRepository userRepository) {
@@ -32,7 +30,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDTO create(UserDTO userDTO)
       throws ConstraintViolationException, EntityNotFoundException {
-    userDTO.setLogin(passwordEncoder.encode(userDTO.getLogin()));
+    userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
     User entity = UserConverter.toEntity(userDTO);
 
     return UserConverter.toDTO(userRepository.save(entity));
@@ -69,18 +67,30 @@ public class UserServiceImpl implements UserService {
     return userRepository.findAll(pageable).map(UserConverter::toDTO);
   }
 
-    @Override
-    public Optional<User> findUserByLogin(String login) {
-        Optional<User> optional = userRepository.findByLogin(login);
-        if(optional.isPresent()){
-            return optional;
-        }
-        else {
-            throw new EntityNotFoundException();
-        }
+  @Override
+  public UserDTO findUserByLoginAndPassword(String login, String password) {
+    Optional<User> optional = userRepository.findByLogin(login);
+    if (optional.isPresent()) {
+      if (passwordEncoder.matches(password, optional.get().getPassword())) {
+        return UserConverter.toDTO(optional.get());
+      }
+    } else {
+      throw new EntityNotFoundException();
     }
+    return null;
+  }
 
-    private Optional<User> findById(Long id) {
+  @Override
+  public UserDTO findByLogin(String login) {
+    Optional<User> optional = userRepository.findByLogin(login);
+    if (optional.isPresent()) {
+      return UserConverter.toDTO(optional.get());
+    } else {
+      throw new EntityNotFoundException();
+    }
+  }
+
+  private Optional<User> findById(Long id) {
     return userRepository.findById(id);
   }
 

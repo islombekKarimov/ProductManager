@@ -13,7 +13,7 @@ public class User extends BaseEntity {
   @NotNull(message = "user name can't be null")
   private String name;
 
-  @Column(name = "login", nullable = false)
+  @Column(name = "login", nullable = false, unique = true)
   @NotNull(message = "User login can't be null")
   private String login;
 
