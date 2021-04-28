@@ -3,6 +3,8 @@ package com.product.controller;
 import com.product.dto.ProductDTO;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,8 @@ import static com.product.constant.ApiPath.API_PRODUCT;
 @RestController
 @RequestMapping(value = API_PRODUCT)
 public class ProductController {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     private ProductService productService;
     private UserService userService;
@@ -58,6 +62,7 @@ public class ProductController {
 
     @GetMapping("/get-list")
     public Page<ProductDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
+       LOGGER.info("Product List: " + productService.findAll(pageable).getContent());
         return productService.findAll(pageable);
     }
 
