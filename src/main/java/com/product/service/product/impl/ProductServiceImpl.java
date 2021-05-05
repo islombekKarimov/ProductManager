@@ -77,6 +77,21 @@ public class ProductServiceImpl implements ProductService {
     return ProductConverter.entityListToDtoList(productRepository.findByUser(id));
   }
 
+  @Override
+  public void groupAdding(List<ProductDTO> productDTOList) {
+    for (ProductDTO dto : productDTOList) {
+      new Thread(
+              () -> {
+                try {
+                    productRepository.save(ProductConverter.toEntity(dto));
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              })
+          .start();
+    }
+  }
+
   private Optional<Product> findById(Long id) {
     return productRepository.findById(id);
   }

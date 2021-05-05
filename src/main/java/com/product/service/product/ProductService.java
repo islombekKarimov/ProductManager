@@ -21,4 +21,6 @@ public interface ProductService {
     Page<ProductDTO> findAll(Pageable pageable);
 
     List<ProductDTO> getProductByUserList(Long id);
+
+    void groupAdding(List<ProductDTO> productDTOList);
 }
