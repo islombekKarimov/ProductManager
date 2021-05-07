@@ -6,7 +6,6 @@ import com.product.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -81,8 +80,14 @@ public class ProductController {
   }
 
   @GetMapping("/get-list")
-  public Page<ProductDTO> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
-      return productService.findAll(pageable);
+  public ResponseEntity<Object> getList(@PageableDefault(size = 30, value = 0) Pageable pageable) {
+    try {
+      return ResponseEntity.ok(productService.findAll(pageable));
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return ResponseEntity.ok(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @PostMapping("/group-adding")
