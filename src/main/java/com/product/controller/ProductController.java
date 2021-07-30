@@ -1,6 +1,8 @@
 package com.product.controller;
 
 import com.product.dto.ProductDTO;
+import com.product.entity.Product;
+import com.product.repository.ProductRepository;
 import com.product.service.product.ProductService;
 import com.product.service.user.UserService;
 import org.slf4j.Logger;
@@ -25,6 +27,9 @@ public class ProductController {
 
   private ProductService productService;
   private UserService userService;
+
+  @Autowired
+  private ProductRepository productRepository;
 
   @Autowired
   public void setProductService(ProductService productService) {
@@ -95,4 +100,15 @@ public class ProductController {
     productService.groupAdding(productDTOList);
     return ResponseEntity.ok(HttpStatus.OK);
   }
+
+    @PutMapping("/update-name")
+    public ResponseEntity<Object> updateName() {
+        List<Product> productList = productRepository.findByBrand("Apple");
+        for (Product product : productList){
+            product.setName("Iphone");
+            productRepository.save(product);
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
 }

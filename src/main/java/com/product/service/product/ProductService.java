@@ -23,4 +23,5 @@ public interface ProductService {
     List<ProductDTO> getProductByUserList(Long id);
 
     void groupAdding(List<ProductDTO> productDTOList);
+
 }
